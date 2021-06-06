@@ -1,5 +1,12 @@
 import mongoose, { Schema } from "mongoose";
-import { IRepository } from "../interfaces/";
+
+export interface IRepository extends Document {
+  userId: string;
+  name: string;
+  description: string;
+  url: string;
+  language: string;
+}
 
 const repositorySchema: Schema = new Schema(
   {
@@ -13,16 +20,14 @@ const repositorySchema: Schema = new Schema(
       required: true
     },
     description: {
-      type: String,
-      required: true
+      type: String
     },
     url: {
       type: String,
       required: true
     },
     language: {
-      type: String,
-      required: true
+      type: String
     }
   },
   { timestamps: true }

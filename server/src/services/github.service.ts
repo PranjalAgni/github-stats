@@ -1,6 +1,6 @@
 import fetch from "node-fetch";
-import { GithubRepository } from "../interfaces";
 import config from "../config";
+import { GithubReposAPI, GithubReposResponse } from "../interfaces";
 import logger from "../utils/logger";
 
 class GithubService {
@@ -16,17 +16,17 @@ class GithubService {
     return GithubService.instance;
   }
 
-  async fetchUserRepos(username: string) {
+  async fetchReposByUsername(username: string): Promise<GithubReposResponse[]> {
     let data = [];
     try {
       const response = await fetch(
-        `${config.github.base}/users/${username}/repos`
+        `${config.github.base}/users/${username}/repos?sort=created`
       );
 
       const repoList = await response.json();
 
       data = repoList.map(
-        ({ name, description, html_url, language }: GithubRepository) => ({
+        ({ name, description, html_url, language }: GithubReposAPI) => ({
           name,
           description,
           url: html_url,

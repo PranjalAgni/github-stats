@@ -1,5 +1,8 @@
 import mongoose, { Schema } from "mongoose";
-import { IUser } from "../interfaces/";
+
+export interface IUser extends Document {
+  username: string;
+}
 
 const userSchema: Schema = new Schema(
   {

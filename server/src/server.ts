@@ -5,8 +5,11 @@ import morgan from "morgan";
 import compression from "compression";
 import { loggerStreamWrite } from "./utils/logger";
 import router from "./routes/";
+import connectDB from "./database";
+import { errorHandler, notFound } from "./utils/middlewares";
 
-const initalizeServer = (): Application => {
+const initalizeServer = async (): Promise<Application> => {
+  await connectDB();
   const app = express();
   app.use(helmet());
   app.use(cors());
@@ -25,6 +28,8 @@ const initalizeServer = (): Application => {
   // This will ensure every API route starts with "/api"
   app.use("/api", router);
 
+  app.use(notFound);
+  app.use(errorHandler);
   return app;
 };
 
