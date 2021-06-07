@@ -23,7 +23,7 @@
 2. Create a Github personal access [token](https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token)
 3. Paste access token in .env file
 4. Create a MongoDB collection
-5. Replace <YOUR_DB> with the collection name in .env file
+5. Replace <DB_NAME> with the collection name in .env file
 
 ```sh
 npm i
