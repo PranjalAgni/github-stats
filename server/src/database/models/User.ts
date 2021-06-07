@@ -9,8 +9,7 @@ const userSchema: Schema = new Schema(
     username: {
       type: String,
       required: true,
-      unique: true,
-      maxLength: 85
+      unique: true
     }
   },
   { timestamps: true }

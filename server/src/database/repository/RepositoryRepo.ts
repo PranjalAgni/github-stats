@@ -15,12 +15,15 @@ class RepositoryRepo {
     return RepositoryRepo.instance;
   }
 
-  async getRepoByUserId(userId: string) {
+  async getRepoByUserId(userId: string, projection: unknown = {}) {
     let repos = null;
     try {
-      repos = await Repository.find({
-        userId
-      });
+      repos = await Repository.find(
+        {
+          userId
+        },
+        projection
+      );
     } catch (ex) {
       logger.error(ex);
     }

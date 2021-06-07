@@ -22,8 +22,15 @@ router.post(
     const user = await UserRepo.getUserByUsername(username);
     let reposList: GithubReposResponse[] = [];
     if (user) {
-      reposList = await RepositoryRepo.getRepoByUserId(user._id);
+      reposList = await RepositoryRepo.getRepoByUserId(user._id, {
+        _id: 0,
+        name: 1,
+        description: 1,
+        language: 1,
+        url: 1
+      });
     } else {
+      logger.info(`Data not present, calling Github API`);
       reposList = await githubService.fetchReposByUsername(username);
       const userId: string = await UserRepo.insertUser(username);
       await RepositoryRepo.insertMany(reposList, userId);
