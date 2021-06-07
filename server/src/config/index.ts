@@ -12,7 +12,8 @@ export default {
   env: process.env.NODE_ENV,
   port: parseInt(process.env.PORT, 10),
   github: {
-    base: "https://api.github.com"
+    base: "https://api.github.com",
+    token: process.env.GITHUB_TOKEN
   },
   db: {
     url: process.env.MONGODB_URL

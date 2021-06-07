@@ -1,6 +1,7 @@
+import { LeanDocument } from "mongoose";
 import { GithubReposResponse } from "../../interfaces";
 import logger from "../../utils/logger";
-import Repository from "../models/Repository";
+import Repository, { IRepository } from "../models/Repository";
 
 class RepositoryRepo {
   private static instance: RepositoryRepo;
@@ -31,6 +32,7 @@ class RepositoryRepo {
   }
 
   async insertMany(repoList: GithubReposResponse[], userId: string) {
+    let insertedRepos: LeanDocument<IRepository[]> = [];
     try {
       const reposDocumentList = repoList.map((repo: GithubReposResponse) => {
         return new Repository({
@@ -39,10 +41,11 @@ class RepositoryRepo {
         });
       });
 
-      await Repository.insertMany(reposDocumentList);
+      insertedRepos = await Repository.insertMany(reposDocumentList);
     } catch (ex) {
       logger.error(ex);
     }
+    return insertedRepos;
   }
 }
 

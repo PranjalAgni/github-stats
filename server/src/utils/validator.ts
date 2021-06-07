@@ -29,7 +29,7 @@ export default (
 
       return formatResponse({
         res,
-        status: 400,
+        status: 422,
         result: {},
         error: message
       });

@@ -11,3 +11,9 @@ export interface GithubReposResponse {
   url: string;
   language: string;
 }
+
+export interface GithubCommitsResponse {
+  userId: string;
+  repoId: string;
+  count: number;
+}

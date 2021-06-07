@@ -1,6 +1,7 @@
 import mongoose, { Schema } from "mongoose";
 
 export interface IRepository extends Document {
+  _id: string;
   userId: string;
   name: string;
   description: string;
