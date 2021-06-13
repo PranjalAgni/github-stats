@@ -3,7 +3,7 @@ import helmet from "helmet";
 import cors from "cors";
 import morgan from "morgan";
 import compression from "compression";
-import { loggerStreamWrite } from "./utils/logger";
+import logger, { loggerStreamWrite } from "./utils/logger";
 import router from "./routes/";
 import connectDB from "./database";
 import { errorHandler, notFound } from "./utils/middlewares";
@@ -28,6 +28,7 @@ const initalizeServer = async (): Promise<Application> => {
   // This will ensure every API route starts with "/api"
   app.use("/api", router);
 
+  logger.info("Router mounted");
   app.use(notFound);
   app.use(errorHandler);
   return app;

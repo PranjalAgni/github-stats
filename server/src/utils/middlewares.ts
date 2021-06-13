@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from "express";
+import logger from "./logger";
 
 export const notFound = (
   req: Request,
@@ -15,6 +16,8 @@ export const errorHandler = (
   res: Response,
   next: NextFunction
 ): void => {
+  logger.error(error.stack);
+
   const statusCode = res.statusCode || 500;
   res.status(statusCode);
   res.json({
